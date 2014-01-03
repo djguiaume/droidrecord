@@ -2,30 +2,38 @@ package com.persil.droidrecorder;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import android.content.Context;
 import android.media.MediaRecorder;
 
 public class Recorder {
 
 	private MediaRecorder mediaRecorder = null;
 	private boolean state;
-	private String file_path;
+	private String file_path = "";
+	private	int Format;
+	private String Extantion = "";
 	
 public Recorder(){
 	if (mediaRecorder == null) {
 		mediaRecorder = new MediaRecorder();
 	}
 	state = false;
+	Format = 0;
 }
 
-public void InitRecord(String path) {
-		  file_path = path;
+public void InitRecord(String ext, int Formate, Context context) {
+		  Extantion = ext;
 			if (mediaRecorder == null) {
 				mediaRecorder = new MediaRecorder();
 			}
+Format = Formate;
+file_path = context.getFilesDir().getAbsolutePath();
+file_path = file_path + System.currentTimeMillis() + Extantion;
   mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-  mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+  mediaRecorder.setOutputFormat(Format);
   mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-  mediaRecorder.setOutputFile(path);
+  mediaRecorder.setOutputFile(file_path);
   state = true;
 }
 
@@ -44,7 +52,7 @@ public void pauseRecording()
 {
 	mediaRecorder.stop();
 	mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-	mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+	mediaRecorder.setOutputFormat(Format);
 	mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
   FileOutputStream paused_file = null;
 try {
@@ -80,7 +88,6 @@ public void ResetRecording() {
 	mediaRecorder.release();
 	}
 }
-
 
 
 }
