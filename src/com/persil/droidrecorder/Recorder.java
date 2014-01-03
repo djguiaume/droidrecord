@@ -12,7 +12,7 @@ public class Recorder {
 	private boolean state;
 	private String file_path = "";
 	private	int Format;
-	private String Extantion = "";
+	private String Extantion = ".";
 	
 public Recorder(){
 	if (mediaRecorder == null) {
