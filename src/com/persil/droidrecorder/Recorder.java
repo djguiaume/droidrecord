@@ -44,7 +44,7 @@ public void pauseRecording()
 {
 	mediaRecorder.stop();
 	mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-	mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+	mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 	mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
   FileOutputStream paused_file = null;
 try {
